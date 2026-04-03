@@ -179,8 +179,8 @@ public class BinarySearchTree {
         return currentNode;
     }
 
-    public void deleteNode(int value) {
-        deleteNode(root, value);
+    public Node deleteNode(int value) {
+        return deleteNode(root, value);
     }
 
 }
