@@ -39,5 +39,11 @@ public class Main {
         System.out.println("is 17 contains: "+myBST.contains(17));
 
         System.out.println("is 1 contains: "+myBST.contains(1));
+
+        myBST.insert(5);
+        myBST.insert(6);
+        myBST.insert(7);
+
+        System.out.println("delete 3: "+myBST.deleteNode(3).value);
     }
 }
