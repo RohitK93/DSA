@@ -60,21 +60,23 @@ public class BinarySearchTree {
         return false;
     }
 
+    public ArrayList<Integer> BFS() {
+        Node currentNode = root;
+        Queue<Node> queue = new LinkedList<>();
+        ArrayList<Integer> results = new ArrayList<>();
+        queue.add(currentNode);
 
-    public void BFS() {
-        Queue<Node> myQueue = new LinkedList<>();
-        myQueue.add(root);
-
-        while (myQueue.size() > 0) {
-            Node currentNode = myQueue.remove();
-            System.out.print(currentNode.value + " ");
+        while (queue.size() > 0) {
+            currentNode = queue.remove();
+            results.add(currentNode.value);
             if (currentNode.left != null) {
-                myQueue.add(currentNode.left);
+                queue.add(currentNode.left);
             }
             if (currentNode.right != null) {
-                myQueue.add(currentNode.right);
+                queue.add(currentNode.right);
             }
         }
+        return results;
     }
 
     private void DFSPreOrder(Node currentNode) {
@@ -86,8 +88,42 @@ public class BinarySearchTree {
             DFSPreOrder(currentNode.right);
         }
     }
-    public void DFSPreOrder() { DFSPreOrder(root); }
+    public void DFSPreOrder() {
+        DFSPreOrder(root);
+    }
 
+
+    public ArrayList<Integer> DFSPreOrder1() {
+        ArrayList<Integer> results = new ArrayList<>();
+
+        class Traverse {
+            Traverse() {
+
+            }
+            Traverse(Node currentNode) {
+                results.add(currentNode.value);
+                if (currentNode.left != null) {
+                    new Traverse(currentNode.left);
+                }
+                if (currentNode.right != null) {
+                    new Traverse(currentNode.right);
+                }
+            }
+            public void DFSPreOrder(Node currentNode) {
+                results.add(currentNode.value);
+                if (currentNode.left != null) {
+                    DFSPreOrder(currentNode.left);
+                }
+                if (currentNode.right != null) {
+                    DFSPreOrder(currentNode.right);
+                }
+            }
+        }
+
+//        new Traverse(root);
+        new Traverse().DFSPreOrder(root);
+        return results;
+    }
 
     private void DFSPostOrder(Node currentNode) {
         if (currentNode.left != null) {
@@ -101,6 +137,25 @@ public class BinarySearchTree {
     public void DFSPostOrder() { DFSPostOrder(root); }
 
 
+    public ArrayList<Integer> DFSPostOrder1() {
+        ArrayList<Integer> results = new ArrayList<>();
+
+        class Traverse {
+            Traverse(Node currentNode) {
+                if (currentNode.left != null) {
+                    new Traverse(currentNode.left);
+                }
+                if (currentNode.right != null) {
+                    new Traverse(currentNode.right);
+                }
+                results.add(currentNode.value);
+            }
+        }
+
+        new Traverse(root);
+        return results;
+    }
+
     private void DFSInOrder(Node currentNode) {
         if (currentNode.left != null) {
             DFSInOrder(currentNode.left);
@@ -113,7 +168,24 @@ public class BinarySearchTree {
     public void DFSInOrder() { DFSInOrder(root); }
 
 
+    public ArrayList<Integer> DFSInOrder1() {
+        ArrayList<Integer> results = new ArrayList<>();
 
+        class Traverse {
+            Traverse(Node currentNode) {
+                if (currentNode.left != null) {
+                    new Traverse(currentNode.left);
+                }
+                results.add(currentNode.value);
+                if (currentNode.right != null) {
+                    new Traverse(currentNode.right);
+                }
+            }
+        }
+
+        new Traverse(root);
+        return results;
+    }
 
 
 
@@ -182,7 +254,6 @@ public class BinarySearchTree {
     public Node deleteNode(int value) {
         return deleteNode(root, value);
     }
-
 }
 
 
